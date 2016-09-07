@@ -1,0 +1,8 @@
+queue:
+- name: pull-queue
+  mode: pull
+  acl:
+  - user_email: shuhei.fujiwara@topgate.co.jp
+  - writer_email: shuhei.fujiwara@topgate.co.jp
+  - user_email: 971194322742-compute@developer.gserviceaccount.com
+  - writer_email: 971194322742-compute@developer.gserviceaccount.com
