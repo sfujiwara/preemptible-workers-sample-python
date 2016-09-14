@@ -26,4 +26,4 @@ gcloud compute --project ${PROJECT_ID} instance-groups managed create "preemptib
   --zone "us-central1-b" \
   --base-instance-name "preemptible-workers" \
   --template "preemptible-worker" \
-  --size "2"
+  --size "0"
