@@ -11,5 +11,9 @@ basic_scaling:
   idle_timeout: 1m
 
 handlers:
+- url: /pw/cron/.*
+  script: main_pw.app
+  login: admin
+
 - url: /.*
   script: main_pw.app

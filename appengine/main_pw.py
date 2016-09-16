@@ -27,16 +27,6 @@ app.config.update(
 )
 
 
-@app.route("/pw/hello", methods=["GET"])
-def hello():
-    q = taskqueue.Queue(QUEUE_NAME)
-    tasks = q.lease_tasks(lease_seconds=60, max_tasks=3)
-    print tasks
-    res = q.fetch_statistics()
-    print res.tasks
-    return str(res)
-
-
 @app.route("/pw/add-pull-queues", methods=["POST"])
 def add_pull_queues():
     queues = flask.request.get_json()["queues"]
@@ -46,7 +36,7 @@ def add_pull_queues():
     return "ok"
 
 
-@app.route("/pw/resize-instance-group", methods=["GET"])
+@app.route("/pw/cron/resize-instance-group", methods=["GET"])
 def resize_instance_group():
     # Count the number of tasks
     n_tasks = taskqueue.Queue(QUEUE_NAME).fetch_statistics().tasks

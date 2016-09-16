@@ -3,7 +3,6 @@
 # Additional modules
 import flask
 
-
 app = flask.Flask(__name__)
 app.config.update(
     DEBUG=False,
