@@ -12,6 +12,7 @@ project_id = subprocess.check_output(
 
 # Add pull queues to App Engine
 url = "https://{}.appspot.com/pw/add-pull-queues".format(project_id)
+# url = "http://localhost:8081/pw/add-pull-queues".format(project_id)
 payload = {"queues": []}
 for i in range(10):
     payload["queues"].append({"file": "file{}".format(i)})

@@ -15,3 +15,5 @@ sh create_instance_group.sh
 ```sh
 python add_pull_queues.py
 ```
+
+App Engine から instance group をチェックする間隔はリースタイムよりも長くしないとだめ
