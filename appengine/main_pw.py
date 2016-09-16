@@ -46,8 +46,8 @@ def add_pull_queues():
     return "ok"
 
 
-@app.route("/pw/resize-n-instances", methods=["GET"])
-def control_n_instances():
+@app.route("/pw/resize-instance-group", methods=["GET"])
+def resize_instance_group():
     # Count the number of tasks
     n_tasks = taskqueue.Queue(QUEUE_NAME).fetch_statistics().tasks
     # Resize the number of instances

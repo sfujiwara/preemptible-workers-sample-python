@@ -1,4 +1,4 @@
 cron:
 - description: resize the number of instances
-  url: /pw/resize-n-instances
+  url: /pw/resize-instance-group
   schedule: every 1 mins
