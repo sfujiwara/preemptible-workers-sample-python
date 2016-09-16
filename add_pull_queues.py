@@ -14,6 +14,6 @@ project_id = subprocess.check_output(
 url = "https://{}.appspot.com/pw/add-pull-queues".format(project_id)
 # url = "http://localhost:8081/pw/add-pull-queues".format(project_id)
 payload = {"queues": []}
-for i in range(10):
+for i in range(3):
     payload["queues"].append({"file": "file{}".format(i)})
 res = requests.post(url, json=payload)

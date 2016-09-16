@@ -3,7 +3,6 @@
 # Default modules
 import json
 import logging
-import time
 
 # Additional modules
 import flask
@@ -47,31 +46,13 @@ def add_pull_queues():
     return "ok"
 
 
-@app.route("/pw/manage-workers", methods=["GET"])
-def manage_workers():
-    q = taskqueue.Queue()
-    task = taskqueue.Task(url="/pw/tq/manage-workers", method="GET")
-    q.add(task)
-    return "ok"
-
-
-@app.route("/pw/tq/manage-workers", methods=["GET"])
-def tq_manage_workers():
+@app.route("/pw/resize-n-instances", methods=["GET"])
+def control_n_instances():
+    # Count the number of tasks
+    n_tasks = taskqueue.Queue(QUEUE_NAME).fetch_statistics().tasks
+    # Resize the number of instances
     credentials = GoogleCredentials.get_application_default()
     compute_api = discovery.build("compute", "v1", credentials=credentials)
-    t = time.time()
-    while True:
-        # Control the number of the instances every one minute
-        if time.time() - t >= 5:
-            t = time.time()
-            control_n_instances(compute_api)
-            if taskqueue.Queue(QUEUE_NAME).fetch_statistics().tasks == 0:
-                break
-    return "ok"
-
-
-def control_n_instances(compute_api):
-    n_tasks = taskqueue.Queue(QUEUE_NAME).fetch_statistics().tasks
     request_resize = compute_api.instanceGroupManagers().resize(
         project=PROJECT_ID,
         zone=ZONE,
@@ -80,7 +61,7 @@ def control_n_instances(compute_api):
     )
     result_resize = request_resize.execute()
     logger.debug("Resize the instance group: {}".format(result_resize))
-    return result_resize
+    return "ok"
 
 
 # def count_instances(compute_api):

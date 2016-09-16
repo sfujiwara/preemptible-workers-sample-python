@@ -1,0 +1,4 @@
+cron:
+- description: resize the number of instances
+  url: /pw/resize-n-instances
+  schedule: every 1 mins
