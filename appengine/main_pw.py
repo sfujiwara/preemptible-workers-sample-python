@@ -29,7 +29,7 @@ app.config.update(
 
 @app.route("/pw/add-pull-queues", methods=["POST"])
 def add_pull_queues():
-    queues = flask.request.get_json()["queues"]
+    queues = flask.request.get_json()["tasks"]
     tasks = [taskqueue.Task(payload=json.dumps(i), method="PULL") for i in queues]
     q = taskqueue.Queue(QUEUE_NAME)
     q.add(tasks)
